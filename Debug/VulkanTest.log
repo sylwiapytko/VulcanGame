@@ -1,0 +1,9 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (VulkanTest.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  main.cpp
+c:\program files (x86)\windows kits\8.1\include\shared\minwindef.h(130): warning C4005: "APIENTRY": Makro-Neudefinition
+  c:\users\hlavach4cs\documents\visual studio 2015\libraries\glfw-3.2.1.bin.win32\include\glfw\glfw3.h(98): note: Siehe vorherige Definition von "APIENTRY"
+d:\data\dropbox\helmut_dropbox\programme\vulkan\vulkanengine\vulkantest\main.cpp(75): warning C4244: "+=": Konvertierung von "double" in "float", möglicher Datenverlust
+main.obj : warning LNK4075: /EDITANDCONTINUE wird aufgrund der Angabe von /OPT:LBR ignoriert.
+LINK : warning LNK4098: Standardbibliothek "MSVCRT" steht in Konflikt mit anderen Bibliotheken; /NODEFAULTLIB:Bibliothek verwenden.
+  VulkanTest.vcxproj -> D:\Data\Dropbox\Helmut_Dropbox\Programme\Vulkan\VulkanEngine\Debug\VulkanEngine.exe
+  VulkanTest.vcxproj -> D:\Data\Dropbox\Helmut_Dropbox\Programme\Vulkan\VulkanEngine\Debug\VulkanEngine.pdb (Full PDB)

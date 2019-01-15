@@ -1,0 +1,12 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (VulkanTest.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  main.cpp
+C:\Program Files (x86)\Windows Kits\8.1\Include\shared\minwindef.h(130): warning C4005: "APIENTRY": Makro-Neudefinition
+  C:\Users\hlavach4cs\Documents\Visual Studio 2015\Libraries\glfw-3.2.1.bin.WIN32\include\GLFW/glfw3.h(98): note: Siehe vorherige Definition von "APIENTRY"
+main.cpp(75): warning C4244: "+=": Konvertierung von "double" in "float", möglicher Datenverlust
+  Code wird generiert.
+  0 of 4727 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    23 functions had inline decision re-evaluated but remain unchanged
+  Codegenerierung ist abgeschlossen.
+  VulkanTest.vcxproj -> D:\Data\Dropbox\Helmut_Dropbox\Programme\Vulkan\VulkanEngine\Release\VulkanEngine.exe
+  VulkanTest.vcxproj -> D:\Data\Dropbox\Helmut_Dropbox\Programme\Vulkan\VulkanEngine\Release\VulkanEngine.pdb (Full PDB)

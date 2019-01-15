@@ -1,0 +1,15 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (VulkanTest.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  VEEngine.cpp
+  Code wird generiert...
+  Überspringen... (keine relevanten Änderungen gefunden)
+  main.cpp
+  VEWindow.cpp
+  VESceneManager.cpp
+  VERendererForward.cpp
+  VERenderer.cpp
+  VEEventListenerGLFW.cpp
+  VEEventListener.cpp
+main.obj : warning LNK4075: /EDITANDCONTINUE wird aufgrund der Angabe von /OPT:LBR ignoriert.
+LINK : warning LNK4098: Standardbibliothek "MSVCRT" steht in Konflikt mit anderen Bibliotheken; /NODEFAULTLIB:Bibliothek verwenden.
+  VulkanTest.vcxproj -> D:\Data\Dropbox\Helmut_Dropbox\Programme\Vulkan\VulkanEngine\x64\Debug\VulkanEngine.exe
+  VulkanTest.vcxproj -> D:\Data\Dropbox\Helmut_Dropbox\Programme\Vulkan\VulkanEngine\x64\Debug\VulkanEngine.pdb (Full PDB)

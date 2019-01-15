@@ -1,0 +1,33 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (VulkanTest.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  main.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\main.cpp(5): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  VEEngine.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\veengine.cpp(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  VEEventListener.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\veeventlistener.cpp(3): fatal error C1083: Cannot open include file: 'GLFW/glfw3.h': No such file or directory
+  VEEventListenerGLFW.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\veeventlistenerglfw.cpp(3): fatal error C1083: Cannot open include file: 'GLFW/glfw3.h': No such file or directory
+  VERenderer.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\verenderer.cpp(5): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  VERendererForward.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\verendererforward.cpp(2): fatal error C1083: Cannot open include file: 'GLFW/glfw3.h': No such file or directory
+  VESceneManager.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\vescenemanager.cpp(2): fatal error C1083: Cannot open include file: 'GLFW/glfw3.h': No such file or directory
+  VEWindow.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\vewindow.cpp(3): fatal error C1083: Cannot open include file: 'GLFW/glfw3.h': No such file or directory
+  VEWindowGLFW.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\vewindowglfw.cpp(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  VHBuffer.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\vhbuffer.cpp(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  VHCommand.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\vhcommand.cpp(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  VHDevice.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\vhdevice.cpp(5): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  VHFile.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\vhfile.cpp(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  VHMemory.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\vhmemory.cpp(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  VHRender.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\vhrender.cpp(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
+  VHSwapchain.cpp
+d:\uni_vienna\computergraphics\vulkanengine.009.05\vulkantest\vhswapchain.cpp(4): fatal error C1083: Cannot open include file: 'glm/glm.hpp': No such file or directory
