@@ -44,13 +44,35 @@ namespace ve {
 		if (event.idata3 == GLFW_REPEAT) return true;	//do I need this?
 		
 		if (event.idata3 == GLFW_PRESS) {				//just started to press a key -> remember it in the engine
-			std::cout << "press";
+			
 			VEEngine::getEnginePointer()->m_keys_pressed.insert(event.idata1);
+
+			// Movment keys - rotation I=73 J=74 K=75 L=76 
+			if (event.idata1 == 73 || event.idata1 == 74 || event.idata1 == 75 || event.idata1 == 76) {
+				int key_pressed_last = VEEngine::getEnginePointer()->m_keys_pressed_last;
+				VEEngine::getEnginePointer()->m_keys_pressed_last = event.idata1;
+
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Bird");
+				if (e9 != nullptr) {
+					glm::mat4 rotate = glm::mat4(1.0f);
+					if (key_pressed_last == event.idata1 + 2 || key_pressed_last == event.idata1 - 2) {
+						rotate = glm::rotate(glm::mat4(1.0f), glm::radians(180.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+					}
+					else if (key_pressed_last == 73 && event.idata1 == 74 || key_pressed_last == 76 && event.idata1 == 73 || key_pressed_last == 75 && event.idata1 == 76 || key_pressed_last == 74 && event.idata1 == 75) {
+						rotate = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+					}
+					else if (key_pressed_last == 74 && event.idata1 == 73 || key_pressed_last == 73 && event.idata1 == 76 || key_pressed_last == 76 && event.idata1 == 75 || key_pressed_last == 75 && event.idata1 == 74) {
+						rotate = glm::rotate(glm::mat4(1.0f), glm::radians(-90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+					}
+					e9->localToParentTransform = e9->localToParentTransform *rotate;
+				}
+			}			
+			
 			return true;
 		}
 
 		if (event.idata3 == GLFW_RELEASE) {				//just released a key -> remove from pressed keys list
-			std::cout << " r ";
+			
 			VEEngine::getEnginePointer()->m_keys_pressed.erase(event.idata1);
 			return true;
 		}

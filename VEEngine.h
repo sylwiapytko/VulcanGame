@@ -32,6 +32,7 @@ namespace ve {
 		std::vector<veEvent> m_eventlist;
 		std::map<std::string, VEEventListener*> m_eventListener;		///<registered event listeners
 		std::set<int> m_keys_pressed = {};
+		int m_keys_pressed_last = 0;
 		std::set<int> m_mouse_buttons_clicked = {};
 
 		double m_dt=0.0, m_time=0.0;

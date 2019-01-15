@@ -40,23 +40,26 @@ namespace ve {
 		MyVulkanEngine() {};
 		~MyVulkanEngine() {};
 		void loadLevel() {
+			
+			/*
 			VEEntity *e1 = m_pSceneManager->loadOBJ( "The Cube", "models\\test", "cube_t_n_s.obj", "cube.png");
 			e1->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 			VEEntity *e2 = m_pSceneManager->loadOBJ( "The Cube2", "models\\test", "cube_t_n_s.obj", "crate0\\crate0_diffuse.png");
 			e2->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 1.0f ));
 			VEEntity *e3 = m_pSceneManager->loadOBJ("The Cube3", "models\\test", "cube_t_n_s.obj", "crate2\\crate2_diffuse.png");
 			e3->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(-2.0f, 4.0f, 1.0f));
-			
+
+			VEEntity *e5 = m_pSceneManager->loadOBJ("The Chalet", "models", "chalet.obj", "chalet.jpg");
+			scale = glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 10.0f, 10.0f));
+			trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -15.0f, 0.0f));
+			e5->localToParentTransform = trans * scale;
+			*/
 
 			VEEntity *e4 = m_pSceneManager->loadOBJ("The Plane", "models\\test", "plane_t_n_s.obj", "grass.jpg", 200.0f);
 			glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(1000.0f, 1000.0f, 1.0f));
 			glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 			e4->localToParentTransform = trans * scale;
 
-			VEEntity *e5 = m_pSceneManager->loadOBJ("The Chalet", "models", "chalet.obj", "chalet.jpg");
-			scale = glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 10.0f, 10.0f));
-			trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -15.0f, 0.0f));
-			e5->localToParentTransform = trans * scale;
 
 			VEEntity *e6 = m_pSceneManager->loadOBJ("The Bird", "models\\test", "Bird1\\12248_Bird_v1_L2.obj", "Bird1\\12248_Bird_v1_diff.jpg");
 			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f, 0.05f, 0.05f));
@@ -64,6 +67,8 @@ namespace ve {
 			glm::mat4 rotate = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 			e6->localToParentTransform = trans *rotate*  scale;
 
+			/*
+			
 			VEEntity *e7 = m_pSceneManager->loadOBJ("The Bird2", "models\\test", "Bird1\\12248_Bird_v1_L2.obj", "Bird1\\12248_Bird_v1_diff.jpg");
 			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f, 0.05f, 0.05f));
 			trans = glm::translate(glm::mat4(1.0f), glm::vec3(8.0f, 4.0f, 1.0f));
@@ -75,6 +80,7 @@ namespace ve {
 			trans = glm::translate(glm::mat4(1.0f), glm::vec3(4.0f, 6.0f, 1.0f));
 			rotate = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 			e8->localToParentTransform = trans * rotate*  scale;
+			*/
 
 		};
 	};
@@ -120,6 +126,23 @@ namespace ve {
 					return false;
 				}
 			}
+			
+			if (event.idata1 == GLFW_KEY_I) {
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Bird");
+				if (e9 != nullptr) {
+					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,-0.1f, 0.0f)) * e9->localToParentTransform;;
+					return false;
+				}
+			}
+			if (event.idata1 == GLFW_KEY_K) {
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Bird");
+				if (e9 != nullptr) {
+					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.1f, 0.0f)) * e9->localToParentTransform;;
+					return false;
+				}
+			}
+			
+			
 			return false;
 		};
 	};
