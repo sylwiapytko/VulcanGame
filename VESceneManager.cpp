@@ -23,6 +23,7 @@
 #include "VERenderer.h"
 #include "VESceneManager.h"
 
+#include <iostream>
 
 namespace ve {
 
@@ -232,6 +233,11 @@ namespace ve {
 		return nullptr;
 	}
 
+	VEEntity * VESceneManager::getRemovedEntity(std::string objectname) {
+		if (m_removedEntities.count(objectname) > 0) return m_removedEntities[objectname];
+		return nullptr;
+	}
+
 	veEntityData *	VESceneManager::getEntityData(std::string entityDataName) {
 		if (m_entityData.count(entityDataName) == 0) return nullptr;
 		return m_entityData[entityDataName];
@@ -239,9 +245,21 @@ namespace ve {
 
 	void VESceneManager::removeEntity(std::string name) {
 		for (auto entity : m_entities) {
-			if (entity.second->pEntityParent->entityName == name) entity.second->pEntityParent->entityName = nullptr;
+		//	if (entity.second->pEntityParent->entityName == name) entity.second->pEntityParent->entityName = nullptr;
+		}
+		VEEntity *e9 = getEntity(name);
+		if (e9 != nullptr) {
+			addRemovedEntity(e9);
 		}
 		m_entities.erase(name);
+	}
+
+	void VESceneManager::returnRemovedEntity(std::string name) {
+		VEEntity *e9 = getRemovedEntity(name);
+		if (e9 != nullptr) {
+			addEntity(e9);
+		}
+		m_removedEntities.erase(name);
 	}
 
 	void VESceneManager::removeEntityData(std::string name) {

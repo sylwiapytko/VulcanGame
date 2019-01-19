@@ -27,6 +27,7 @@ namespace ve {
 
 	protected:
 		std::map<std::string, VEEntity*>	 m_entities = {};	///< storage of all entities currently in the engine
+		std::map<std::string, VEEntity*>	 m_removedEntities = {};	///< storage of all entities currently in the engine
 		std::map<std::string, veEntityData*> m_entityData = {};	///< storage of all OBJ file data loaded so far
 
 		std::string			  m_cameraName = "";				//entity name of the current camera
@@ -50,8 +51,11 @@ namespace ve {
 								std::string filename, int32_t shapeIdx = -1 );		///< full load
 
 		void			addEntity(VEEntity *entity) { m_entities[entity->entityName] = entity; };
+		void			addRemovedEntity(VEEntity *entity) { m_removedEntities[entity->entityName] = entity; };
 		VEEntity *		getEntity(std::string entityName);		 								///< return a pointer to an entity
+		VEEntity *		getRemovedEntity(std::string entityName);		 								///< return a pointer to an entity
 		void			removeEntity(std::string name);
+		void			returnRemovedEntity(std::string name);
 
 		void			addEntityData(veEntityData *entityData) { m_entityData[entityData->entityDataName] = entityData; };
 		veEntityData *	getEntityData(std::string entityDataName);

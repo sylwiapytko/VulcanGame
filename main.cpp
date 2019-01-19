@@ -67,6 +67,9 @@ namespace ve {
 			glm::mat4 rotate = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 			e6->localToParentTransform = trans *rotate*  scale;
 
+			VEEntity *e1 = m_pSceneManager->loadOBJ("The Cube", "models\\test", "cube_t_n_s.obj", "cube.png");
+			e1->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+
 			/*
 			
 			VEEntity *e7 = m_pSceneManager->loadOBJ("The Bird2", "models\\test", "Bird1\\12248_Bird_v1_L2.obj", "Bird1\\12248_Bird_v1_diff.jpg");
@@ -146,6 +149,36 @@ namespace ve {
 			return false;
 		};
 	};
+	class TestListener : public VEEventListener {
+	public:
+		TestListener() : VEEventListener() {};
+
+		bool onKeyboard(veEvent event) {
+			if (event.idata1 == GLFW_KEY_V) {
+				getSceneManagerPointer()->removeEntity("The Cube");
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
+				if (e9 == nullptr) {
+					std::cout << "none";
+				}
+			}
+			if (event.idata1 == GLFW_KEY_B) {
+				getSceneManagerPointer()->returnRemovedEntity("The Cube");
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
+				if (e9 == nullptr) {
+					std::cout << "none";
+				}
+			}
+			if (event.idata1 == GLFW_KEY_N) {
+				std::cout << "N ";
+				veEntityData *e9 = getSceneManagerPointer()->getEntity("The Bird")->pEntityData;
+				if (e9 != nullptr) {
+					std::cout << e9->entityDataName;
+					return true;
+				}
+			}
+			return false;
+		};
+	};
 
 }
 
@@ -162,6 +195,9 @@ int main() {
 
 	BirdListener * listener1 = new BirdListener();
 	mve.registerEventListener("BirdListener", listener1);
+
+	TestListener * listener2 = new TestListener();
+	mve.registerEventListener("TestListener", listener2);
 
 	try {
 		mve.run();
