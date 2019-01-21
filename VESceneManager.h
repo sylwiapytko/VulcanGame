@@ -61,6 +61,8 @@ namespace ve {
 		veEntityData *	getEntityData(std::string entityDataName);
 		void			removeEntityData(std::string name);
 
+		veEntityBoundingBox * calculateEntityBoundingBox(std::vector<vh::vhVertex> vertices);
+
 		std::string		getCameraName() { return m_cameraName; };
 		void			setCameraName(std::string name) { m_cameraName = name; };
 

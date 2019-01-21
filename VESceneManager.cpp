@@ -50,7 +50,6 @@ namespace ve {
 		m_lightNames.insert(light->entityName);
 	};
 
-
 	//---------------------------------------------------------------------------------------------
 	//simple OBJ loader
 	//
@@ -93,6 +92,8 @@ namespace ve {
 					vh::vhBufCreateTextureSampler(getRendererPointer()->device, &material.map_Kd.sampler);
 
 					entityData->materials.push_back(material);		//store in the entityData material array
+				
+					entityData->boundingBox = calculateEntityBoundingBox(entityData->vertices);
 				}
 				else entity->drawEntity = false;
 				m_entityData[filekey] = entityData;								//store file data in array
@@ -291,6 +292,21 @@ namespace ve {
 		}
 		m_entityData.erase(name);
 	}
+
+	veEntityBoundingBox * VESceneManager::calculateEntityBoundingBox(std::vector<vh::vhVertex> vertices) {
+		veEntityBoundingBox *boundingBox = new veEntityBoundingBox();
+		for (auto const& v : vertices) {
+			if (v.pos.x > boundingBox->maxVertex.x) boundingBox->maxVertex.x = v.pos.x;
+			if (v.pos.y > boundingBox->maxVertex.y) boundingBox->maxVertex.y = v.pos.y;
+			if (v.pos.z > boundingBox->maxVertex.z) boundingBox->maxVertex.z = v.pos.z;
+
+			if (v.pos.x < boundingBox->minVertex.x) boundingBox->minVertex.x = v.pos.x;
+			if (v.pos.y < boundingBox->minVertex.y) boundingBox->minVertex.y = v.pos.y;
+			if (v.pos.z < boundingBox->minVertex.z) boundingBox->minVertex.z = v.pos.z;
+		}
+
+		return boundingBox;
+	};
 
 	void VESceneManager::freeTexture(veTexture & texture) {
 		if (texture.imageView != VK_NULL_HANDLE) vkDestroyImageView(VEEngine::getEnginePointer()->getRenderer()->device, texture.imageView, nullptr);

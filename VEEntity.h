@@ -59,6 +59,11 @@ namespace ve {
 		veTexture map_Ke = {};
 	};
 
+	struct veEntityBoundingBox {
+		glm::vec3 maxVertex;
+		glm::vec3 minVertex;
+	};
+
 	struct veEntityData {
 		std::string				entityDataName = "";
 		//vh::vhFileData			fileData = {};
@@ -69,6 +74,8 @@ namespace ve {
 		VkBuffer				indexBuffer = VK_NULL_HANDLE;
 		VkDeviceMemory			indexBufferMemory = VK_NULL_HANDLE;
 		std::vector<veMaterial> materials = {};
+
+		veEntityBoundingBox	*	boundingBox;
 	};
 
 
