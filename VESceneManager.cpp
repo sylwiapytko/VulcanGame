@@ -293,17 +293,26 @@ namespace ve {
 		m_entityData.erase(name);
 	}
 
+	void VESceneManager::removeEntityBoundingBox(std::string name){
+		m_entityBoundingBox.erase(name);
+	};
+
 	veEntityBoundingBox * VESceneManager::calculateEntityBoundingBox(std::vector<vh::vhVertex> vertices) {
 		veEntityBoundingBox *boundingBox = new veEntityBoundingBox();
-		for (auto const& v : vertices) {
-			if (v.pos.x > boundingBox->maxVertex.x) boundingBox->maxVertex.x = v.pos.x;
-			if (v.pos.y > boundingBox->maxVertex.y) boundingBox->maxVertex.y = v.pos.y;
-			if (v.pos.z > boundingBox->maxVertex.z) boundingBox->maxVertex.z = v.pos.z;
+		glm::vec3 maxVertex;
+		glm::vec3 minVertex;
 
-			if (v.pos.x < boundingBox->minVertex.x) boundingBox->minVertex.x = v.pos.x;
-			if (v.pos.y < boundingBox->minVertex.y) boundingBox->minVertex.y = v.pos.y;
-			if (v.pos.z < boundingBox->minVertex.z) boundingBox->minVertex.z = v.pos.z;
+		for (auto const& v : vertices) {
+			if (v.pos.x > maxVertex.x) maxVertex.x = v.pos.x;
+			if (v.pos.y > maxVertex.y) maxVertex.y = v.pos.y;
+			if (v.pos.z > maxVertex.z) maxVertex.z = v.pos.z;
+
+			if (v.pos.x < minVertex.x) minVertex.x = v.pos.x;
+			if (v.pos.y < minVertex.y) minVertex.y = v.pos.y;
+			if (v.pos.z < minVertex.z) minVertex.z = v.pos.z;
 		}
+		boundingBox->maxVertex = glm::vec4(maxVertex, 1);
+		boundingBox->minVertex = glm::vec4(minVertex, 1);
 
 		return boundingBox;
 	};

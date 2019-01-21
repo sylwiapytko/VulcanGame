@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/hash.hpp>
+#include <glm/gtx/string_cast.hpp>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -67,8 +68,22 @@ namespace ve {
 			glm::mat4 rotate = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 			e6->localToParentTransform = trans *rotate*  scale;
 
+			//veEntityBoundingBox * e6BoundingBox = e6->pEntityData->boundingBox;
+			//e6BoundingBox->maxVertex = e6->localToParentTransform * e6BoundingBox->maxVertex;
+			//e6BoundingBox->minVertex = e6->localToParentTransform * e6BoundingBox->minVertex;
+
 			VEEntity *e1 = m_pSceneManager->loadOBJ("The Cube", "models\\test", "cube_t_n_s.obj", "cube.png");
-			e1->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+			e1->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, 1.0f));
+
+			veEntityBoundingBox * e1BoundingBox = e1->pEntityData->boundingBox;
+			e1BoundingBox->maxVertexCurr = e1->localToParentTransform * e1BoundingBox->maxVertex;
+			e1BoundingBox->minVertexCurr = e1->localToParentTransform * e1BoundingBox->minVertex;
+
+			VEEntity *e2 = m_pSceneManager->loadOBJ("The Cube2", "models\\test", "cube_t_n_s.obj", "crate0\\crate0_diffuse.png");
+			e2->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 1.0f));
+			veEntityBoundingBox * e2BoundingBox = e2->pEntityData->boundingBox;
+			e2BoundingBox->maxVertexCurr = e2->localToParentTransform * e2BoundingBox->maxVertex;
+			e2BoundingBox->minVertexCurr = e2->localToParentTransform * e2BoundingBox->minVertex;
 
 			/*
 			
@@ -116,14 +131,14 @@ namespace ve {
 
 		bool onKeyboard(veEvent event) {
 			if (event.idata1 == GLFW_KEY_J) {
-				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Bird");
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
 				if (e9 != nullptr) {				
 					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.1f, 0.0f, 0.0f)) * e9->localToParentTransform;;
 					return false;
 				}
 			}
 			if (event.idata1 == GLFW_KEY_L) {
-				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Bird");
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
 				if (e9 != nullptr) {
 					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(-0.1f, 0.0f, 0.0f)) * e9->localToParentTransform;;
 					return false;
@@ -131,14 +146,14 @@ namespace ve {
 			}
 			
 			if (event.idata1 == GLFW_KEY_I) {
-				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Bird");
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
 				if (e9 != nullptr) {
 					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,-0.1f, 0.0f)) * e9->localToParentTransform;;
 					return false;
 				}
 			}
 			if (event.idata1 == GLFW_KEY_K) {
-				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Bird");
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
 				if (e9 != nullptr) {
 					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.1f, 0.0f)) * e9->localToParentTransform;;
 					return false;
@@ -157,26 +172,33 @@ namespace ve {
 			if (event.idata1 == GLFW_KEY_V) {
 				getSceneManagerPointer()->removeEntity("The Cube");
 				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
-				if (e9 == nullptr) {
-					std::cout << "none";
-				}
 			}
 			if (event.idata1 == GLFW_KEY_B) {
 				getSceneManagerPointer()->returnRemovedEntity("The Cube");
-				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
-				if (e9 == nullptr) {
-					std::cout << "none";
-				}
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");				
 			}
+
 			if (event.idata1 == GLFW_KEY_N) {
-				std::cout << "N ";
-				veEntityData *e9 = getSceneManagerPointer()->getEntity("The Bird")->pEntityData;
-				if (e9 != nullptr) {
-					std::cout << e9->entityDataName;
-					return true;
-				}
+				
 			}
 			return false;
+		};
+
+		void onFrameStarted(veEvent event) {
+			VEEntity *e1 = getSceneManagerPointer()->getEntity("The Cube");
+			VEEntity *e2 = getSceneManagerPointer()->getEntity("The Cube2");
+
+			veEntityBoundingBox * e1BoundingBox = e1->pEntityData->boundingBox;
+			e1BoundingBox->maxVertexCurr = e1->localToParentTransform * e1BoundingBox->maxVertex;
+			e1BoundingBox->minVertexCurr = e1->localToParentTransform * e1BoundingBox->minVertex;
+
+			glm::vec4 e1max = e1->pEntityData->boundingBox->maxVertexCurr;
+			glm::vec4 e1min = e1->pEntityData->boundingBox->minVertexCurr;
+			glm::vec4 e2max = e2->pEntityData->boundingBox->maxVertexCurr;
+			glm::vec4 e2min = e2->pEntityData->boundingBox->minVertexCurr;
+			if (e1max.x >= e2min.x && e2max.x >= e1min.x && e1max.y >= e2min.y && e2max.y >= e1min.y) {
+				std::cout << "t "<<std::endl;
+			}
 		};
 	};
 

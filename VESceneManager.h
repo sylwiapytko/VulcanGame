@@ -27,8 +27,10 @@ namespace ve {
 
 	protected:
 		std::map<std::string, VEEntity*>	 m_entities = {};	///< storage of all entities currently in the engine
-		std::map<std::string, VEEntity*>	 m_removedEntities = {};	///< storage of all entities currently in the engine
+		std::map<std::string, VEEntity*>	 m_removedEntities = {};	
 		std::map<std::string, veEntityData*> m_entityData = {};	///< storage of all OBJ file data loaded so far
+
+		std::map<std::string, veEntityBoundingBox*> m_entityBoundingBox = {};	
 
 		std::string			  m_cameraName = "";				//entity name of the current camera
 		std::set<std::string> m_lightNames = {};				//names of the lights to use
@@ -61,6 +63,8 @@ namespace ve {
 		veEntityData *	getEntityData(std::string entityDataName);
 		void			removeEntityData(std::string name);
 
+		void			addEntityBoundingBox(veEntityBoundingBox *entityBoundingBox) { m_entityBoundingBox[entityBoundingBox->entityBoxName] = entityBoundingBox; };
+		void			removeEntityBoundingBox(std::string name);
 		veEntityBoundingBox * calculateEntityBoundingBox(std::vector<vh::vhVertex> vertices);
 
 		std::string		getCameraName() { return m_cameraName; };

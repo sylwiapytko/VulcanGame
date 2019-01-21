@@ -60,8 +60,11 @@ namespace ve {
 	};
 
 	struct veEntityBoundingBox {
-		glm::vec3 maxVertex;
-		glm::vec3 minVertex;
+		std::string	entityBoxName = "";
+		glm::vec4 maxVertex;
+		glm::vec4 minVertex;
+		glm::vec4 maxVertexCurr;
+		glm::vec4 minVertexCurr;
 	};
 
 	struct veEntityData {
