@@ -77,8 +77,7 @@ namespace ve {
 		VkBuffer				indexBuffer = VK_NULL_HANDLE;
 		VkDeviceMemory			indexBufferMemory = VK_NULL_HANDLE;
 		std::vector<veMaterial> materials = {};
-
-		veEntityBoundingBox	*	boundingBox;
+		
 	};
 
 
@@ -104,6 +103,8 @@ namespace ve {
 		std::vector<VkBuffer>			uniformBuffers;			//one for each framebuffer frame
 		std::vector<VkDeviceMemory>		uniformBuffersMemory;
 		std::vector<VkDescriptorSet>	descriptorSets;
+
+		veEntityBoundingBox	*	boundingBox;
 
 		VEEntity( std::string name ) : entityName(name) {};
 

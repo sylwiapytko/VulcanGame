@@ -93,7 +93,6 @@ namespace ve {
 
 					entityData->materials.push_back(material);		//store in the entityData material array
 				
-					entityData->boundingBox = calculateEntityBoundingBox(entityData->vertices);
 				}
 				else entity->drawEntity = false;
 				m_entityData[filekey] = entityData;								//store file data in array
@@ -108,6 +107,7 @@ namespace ve {
 												getRendererPointer()->getDescriptorSetLayout(), getRendererPointer()->getDescriptorPool(), 
 												entity->descriptorSets);
 			}
+			entity->boundingBox = calculateEntityBoundingBox(m_entityData[filekey]->vertices);
 		}
 		else entity->drawEntity = false;
 
