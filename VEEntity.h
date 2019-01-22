@@ -104,7 +104,7 @@ namespace ve {
 		std::vector<VkDeviceMemory>		uniformBuffersMemory;
 		std::vector<VkDescriptorSet>	descriptorSets;
 
-		veEntityBoundingBox	*	boundingBox;
+		veEntityBoundingBox	*	boundingBox = nullptr;
 
 		VEEntity( std::string name ) : entityName(name) {};
 

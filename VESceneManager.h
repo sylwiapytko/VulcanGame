@@ -67,6 +67,9 @@ namespace ve {
 		void			removeEntityBoundingBox(std::string name);
 		veEntityBoundingBox * calculateEntityBoundingBox(std::vector<vh::vhVertex> vertices);
 
+		void updateEntityCurrentBoundingBox(VEEntity *entity);
+		std::set<std::string> findUserCollision(std::string entityName);
+
 		std::string		getCameraName() { return m_cameraName; };
 		void			setCameraName(std::string name) { m_cameraName = name; };
 

@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/hash.hpp>
+#include <glm/gtx/string_cast.hpp>
 
 #include "tiny_obj_loader.h"
 
@@ -299,10 +300,11 @@ namespace ve {
 
 	veEntityBoundingBox * VESceneManager::calculateEntityBoundingBox(std::vector<vh::vhVertex> vertices) {
 		veEntityBoundingBox *boundingBox = new veEntityBoundingBox();
-		glm::vec3 maxVertex;
-		glm::vec3 minVertex;
+		glm::vec3 maxVertex = vertices.front().pos;
+		glm::vec3 minVertex = vertices.front().pos;
 
 		for (auto const& v : vertices) {
+
 			if (v.pos.x > maxVertex.x) maxVertex.x = v.pos.x;
 			if (v.pos.y > maxVertex.y) maxVertex.y = v.pos.y;
 			if (v.pos.z > maxVertex.z) maxVertex.z = v.pos.z;
@@ -314,8 +316,46 @@ namespace ve {
 		boundingBox->maxVertex = glm::vec4(maxVertex, 1);
 		boundingBox->minVertex = glm::vec4(minVertex, 1);
 
+		boundingBox->maxVertexCurr = boundingBox->maxVertex;
+		boundingBox->minVertexCurr = boundingBox->minVertex;
+		std::cout << glm::to_string(maxVertex)<<std::endl;
+		std::cout << glm::to_string(minVertex) << std::endl;
 		return boundingBox;
-	};
+	}
+
+	void VESceneManager::updateEntityCurrentBoundingBox(VEEntity * entity)
+	{
+		veEntityBoundingBox * entityBoundingBox = entity->boundingBox;
+		entityBoundingBox->maxVertexCurr = entity->localToParentTransform * entityBoundingBox->maxVertex;
+		entityBoundingBox->minVertexCurr = entity->localToParentTransform * entityBoundingBox->minVertex;
+	}
+
+	std::set<std::string> VESceneManager::findUserCollision(std::string entityName)
+	{
+		VEEntity *eUser = getSceneManagerPointer()->getEntity(entityName);
+		updateEntityCurrentBoundingBox(eUser);
+		glm::vec4 eUserBBMax = eUser->boundingBox->maxVertexCurr;
+		glm::vec4 eUserBBMin = eUser->boundingBox->minVertexCurr;
+
+		std::set<std::string> entitiesColided = {};
+
+		for (auto const& entity : m_entities)
+		{
+			if (entity.second != eUser && entity.first!= "The Plane" && entity.second->boundingBox!=nullptr) {
+				//std::cout << entity.first <<std:: endl;
+				glm::vec4 entityBBMax = entity.second->boundingBox->maxVertexCurr;
+				glm::vec4 entityBBMin = entity.second->boundingBox->minVertexCurr;
+
+				if (eUserBBMax.x >= entityBBMin.x && entityBBMax.x >= eUserBBMin.x && eUserBBMax.y >= entityBBMin.y && entityBBMax.y >= eUserBBMin.y) {
+					entitiesColided.insert(entity.first);
+					std::cout << entity.first ;
+					std::cout << glm::to_string(entityBBMin)<<" "<<glm::to_string(entityBBMax) << std::endl;
+					std::cout << glm::to_string(eUserBBMax) <<" "<< glm::to_string(eUserBBMin) << std::endl;
+				}
+			}			
+		}
+		return entitiesColided;
+	}
 
 	void VESceneManager::freeTexture(veTexture & texture) {
 		if (texture.imageView != VK_NULL_HANDLE) vkDestroyImageView(VEEngine::getEnginePointer()->getRenderer()->device, texture.imageView, nullptr);

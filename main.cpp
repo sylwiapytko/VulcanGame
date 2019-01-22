@@ -61,12 +61,21 @@ namespace ve {
 			glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 			e4->localToParentTransform = trans * scale;
 
-
+			/*
+			
 			VEEntity *e6 = m_pSceneManager->loadOBJ("The Bird", "models\\test", "Bird1\\12248_Bird_v1_L2.obj", "Bird1\\12248_Bird_v1_diff.jpg");
 			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f, 0.05f, 0.05f));
 			trans = glm::translate(glm::mat4(1.0f), glm::vec3(00.0f, -2.0f, 1.0f));
 			glm::mat4 rotate = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 			e6->localToParentTransform = trans *rotate*  scale;
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(e6);
+			std::cout << "Duck" << std::endl;
+			std::cout << glm::to_string(e6->boundingBox->maxVertex) << std::endl;
+			std::cout << glm::to_string(e6->boundingBox->minVertex) << std::endl;
+			std::cout << "Duck" << std::endl;
+			std::cout << glm::to_string(e6->boundingBox->maxVertexCurr) << std::endl;
+			std::cout << glm::to_string(e6->boundingBox->minVertexCurr) << std::endl;
+			*/
 
 			//veEntityBoundingBox * e6BoundingBox = e6->pEntityData->boundingBox;
 			//e6BoundingBox->maxVertex = e6->localToParentTransform * e6BoundingBox->maxVertex;
@@ -75,19 +84,41 @@ namespace ve {
 			VEEntity *e1 = m_pSceneManager->loadOBJ("The Cube", "models\\test", "cube_t_n_s.obj", "cube.png");
 			e1->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, 1.0f));
 
-			veEntityBoundingBox * e1BoundingBox = e1->boundingBox;
-			e1BoundingBox->maxVertexCurr = e1->localToParentTransform * e1BoundingBox->maxVertex;
-			e1BoundingBox->minVertexCurr = e1->localToParentTransform * e1BoundingBox->minVertex;
+			//veEntityBoundingBox * e1BoundingBox = e1->boundingBox;
+			//e1BoundingBox->maxVertexCurr = e1->localToParentTransform * e1BoundingBox->maxVertex;
+			//e1BoundingBox->minVertexCurr = e1->localToParentTransform * e1BoundingBox->minVertex;
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(e1);
+			std::cout << "cube" << std::endl;
+			std::cout << glm::to_string(e1->boundingBox->maxVertex) << std::endl;
+			std::cout << glm::to_string(e1->boundingBox->minVertex) << std::endl;
+			std::cout << glm::to_string(e1->boundingBox->maxVertexCurr) << std::endl;
+			std::cout << glm::to_string(e1->boundingBox->minVertexCurr) << std::endl;
 
 			//VEEntity *e2 = m_pSceneManager->loadOBJ("The Cube2", "models\\test", "cube_t_n_s.obj", "crate0\\crate0_diffuse.png");
 			VEEntity *e2 = m_pSceneManager->loadOBJ("The Cube2", "models\\test", "cube_t_n_s.obj", "cube.png");
 			e2->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 1.0f));
-			veEntityBoundingBox * e2BoundingBox = e2->boundingBox;
-			e2BoundingBox->maxVertexCurr = e2->localToParentTransform * e2BoundingBox->maxVertex;
-			e2BoundingBox->minVertexCurr = e2->localToParentTransform * e2BoundingBox->minVertex;
+			//veEntityBoundingBox * e2BoundingBox = e2->boundingBox;
+			//e2BoundingBox->maxVertexCurr = e2->localToParentTransform * e2BoundingBox->maxVertex;
+			//e2BoundingBox->minVertexCurr = e2->localToParentTransform * e2BoundingBox->minVertex;
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(e2);
+			std::cout << "cube2" << std:: endl;
+			std::cout << glm::to_string(e2->boundingBox->maxVertex) << std::endl;
+			std::cout << glm::to_string(e2->boundingBox->minVertex) << std::endl;
+			std::cout << glm::to_string(e2->boundingBox->maxVertexCurr) << std::endl;
+			std::cout << glm::to_string(e2->boundingBox->minVertexCurr) << std::endl;
 
 
-
+			VEEntity *e3 = m_pSceneManager->loadOBJ("The ", "models\\test", "cube_t_n_s.obj", "cube.png");
+			e3->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(4.0f, 0.0f, 1.0f));
+			//veEntityBoundingBox * e2BoundingBox = e2->boundingBox;
+			//e2BoundingBox->maxVertexCurr = e2->localToParentTransform * e2BoundingBox->maxVertex;
+			//e2BoundingBox->minVertexCurr = e2->localToParentTransform * e2BoundingBox->minVertex;
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(e3);
+			std::cout << "cube3" << std::endl;
+			std::cout << glm::to_string(e3->boundingBox->maxVertex) << std::endl;
+			std::cout << glm::to_string(e3->boundingBox->minVertex) << std::endl;
+			std::cout << glm::to_string(e3->boundingBox->maxVertexCurr) << std::endl;
+			std::cout << glm::to_string(e3->boundingBox->minVertexCurr) << std::endl;
 			/*
 			
 			VEEntity *e7 = m_pSceneManager->loadOBJ("The Bird2", "models\\test", "Bird1\\12248_Bird_v1_L2.obj", "Bird1\\12248_Bird_v1_diff.jpg");
@@ -162,6 +193,7 @@ namespace ve {
 					return false;
 				}
 			}
+			//std::set<std::string> entitiesColided = getSceneManagerPointer()->findUserCollision("The Cube");
 			
 			
 			return false;
@@ -188,23 +220,7 @@ namespace ve {
 		};
 
 		void onFrameStarted(veEvent event) {
-			VEEntity *e1 = getSceneManagerPointer()->getEntity("The Cube");
-			VEEntity *e2 = getSceneManagerPointer()->getEntity("The Cube2");
-
-			veEntityBoundingBox * e1BoundingBox = e1->boundingBox;
-			e1BoundingBox->maxVertexCurr = e1->localToParentTransform * e1BoundingBox->maxVertex;
-			e1BoundingBox->minVertexCurr = e1->localToParentTransform * e1BoundingBox->minVertex;
-
-			glm::vec4 e1max = e1->boundingBox->maxVertexCurr;
-			glm::vec4 e1min = e1->boundingBox->minVertexCurr;
-			glm::vec4 e2max = e2->boundingBox->maxVertexCurr;
-			glm::vec4 e2min = e2->boundingBox->minVertexCurr;
-			if (e1max.x >= e2min.x && e2max.x >= e1min.x && e1max.y >= e2min.y && e2max.y >= e1min.y) {
-				std::cout << "t "<<std::endl;
-				//std::cout << glm::to_string(e1max) << std::endl;
-				//std::cout << glm::to_string(e2max) << std::endl;
-
-			}
+			std::set<std::string> entitiesColided = getSceneManagerPointer()->findUserCollision("The Cube");
 		};
 	};
 
