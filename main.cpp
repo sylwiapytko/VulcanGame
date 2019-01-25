@@ -167,36 +167,80 @@ namespace ve {
 		bool onKeyboard(veEvent event) {
 			if (event.idata1 == GLFW_KEY_J) {
 				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
-				if (e9 != nullptr) {				
+				if (e9 != nullptr) {
 					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.1f, 0.0f, 0.0f)) * e9->localToParentTransform;;
-					return false;
 				}
+				std::set<VEEntity*> entitiesColided = getSceneManagerPointer()->findUserCollision("The Cube");
+				bool box = 0;
+				for (auto entityColided : entitiesColided) {
+					if (entityColided->entityObjectType == "Box") {
+						box = 1;
+						std::cout << "Hit! ";
+					}
+				}
+				if (e9 != nullptr && box) {
+					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(-0.1f, 0.0f, 0.0f)) * e9->localToParentTransform;;	
+				}
+				return false;
 			}
 			if (event.idata1 == GLFW_KEY_L) {
 				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
 				if (e9 != nullptr) {
 					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(-0.1f, 0.0f, 0.0f)) * e9->localToParentTransform;;
-					return false;
 				}
+				std::set<VEEntity*> entitiesColided = getSceneManagerPointer()->findUserCollision("The Cube");
+				bool box = 0;
+				for (auto entityColided : entitiesColided) {
+					if (entityColided->entityObjectType == "Box") {
+						box = 1;
+						std::cout << "Hit! ";
+					}
+				}
+				if (e9 != nullptr && box) {
+					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.1f, 0.0f, 0.0f)) * e9->localToParentTransform;;
+				}
+				return false;
 			}
 			
 			if (event.idata1 == GLFW_KEY_I) {
 				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
-				if (e9 != nullptr) {
-					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,-0.1f, 0.0f)) * e9->localToParentTransform;;
-					return false;
+				if (e9 != nullptr ) {
+					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.1f, 0.0f)) * e9->localToParentTransform;;			
 				}
+				std::set<VEEntity*> entitiesColided = getSceneManagerPointer()->findUserCollision("The Cube");
+				bool box = 0;
+				for (auto entityColided : entitiesColided) {
+					std::cout << "H";
+					if (entityColided->entityObjectType == "Box") {
+						box = 1;
+						std::cout << "Hit! ";
+					}
+				}
+				if (e9 != nullptr && box) {
+					std::cout << "Hit!2 ";
+					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.1f, 0.0f)) * e9->localToParentTransform;;
+					
+				}
+				return false;
 			}
 			if (event.idata1 == GLFW_KEY_K) {
 				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
-				if (e9 != nullptr) {
+				if (e9 != nullptr ) {
 					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.1f, 0.0f)) * e9->localToParentTransform;;
-					return false;
 				}
+				std::set<VEEntity*> entitiesColided = getSceneManagerPointer()->findUserCollision("The Cube");
+				bool box = 0;
+				for (auto entityColided : entitiesColided) {
+					if (entityColided->entityObjectType == "Box") {
+						box = 1;
+						std::cout << "Hit! ";
+					}
+				}
+				if (e9 != nullptr && box) {
+					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.1f, 0.0f)) * e9->localToParentTransform;;
+				}
+				return false;
 			}
-			//std::set<std::string> entitiesColided = getSceneManagerPointer()->findUserCollision("The Cube");
-			
-			
 			return false;
 		};
 	};
@@ -221,6 +265,7 @@ namespace ve {
 		};
 
 		void onFrameStarted(veEvent event) {
+			
 			std::set<VEEntity*> entitiesColided = getSceneManagerPointer()->findUserCollision("The Cube");
 			for (auto entityColided : entitiesColided) {
 				if (entityColided->entityObjectType == "Fruit") {
