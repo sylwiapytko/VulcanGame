@@ -82,43 +82,44 @@ namespace ve {
 			//e6BoundingBox->minVertex = e6->localToParentTransform * e6BoundingBox->minVertex;
 
 			VEEntity *e1 = m_pSceneManager->loadOBJ("The Cube", "models\\test", "cube_t_n_s.obj", "cube.png");
+			e1->entityObjectType = "User";
 			e1->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, 1.0f));
-
-			//veEntityBoundingBox * e1BoundingBox = e1->boundingBox;
-			//e1BoundingBox->maxVertexCurr = e1->localToParentTransform * e1BoundingBox->maxVertex;
-			//e1BoundingBox->minVertexCurr = e1->localToParentTransform * e1BoundingBox->minVertex;
 			getSceneManagerPointer()->updateEntityCurrentBoundingBox(e1);
+			/*			
 			std::cout << "cube" << std::endl;
 			std::cout << glm::to_string(e1->boundingBox->maxVertex) << std::endl;
 			std::cout << glm::to_string(e1->boundingBox->minVertex) << std::endl;
 			std::cout << glm::to_string(e1->boundingBox->maxVertexCurr) << std::endl;
 			std::cout << glm::to_string(e1->boundingBox->minVertexCurr) << std::endl;
+			*/
 
 			//VEEntity *e2 = m_pSceneManager->loadOBJ("The Cube2", "models\\test", "cube_t_n_s.obj", "crate0\\crate0_diffuse.png");
 			VEEntity *e2 = m_pSceneManager->loadOBJ("The Cube2", "models\\test", "cube_t_n_s.obj", "cube.png");
+			e2->entityObjectType = "Box";
 			e2->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 1.0f));
-			//veEntityBoundingBox * e2BoundingBox = e2->boundingBox;
-			//e2BoundingBox->maxVertexCurr = e2->localToParentTransform * e2BoundingBox->maxVertex;
-			//e2BoundingBox->minVertexCurr = e2->localToParentTransform * e2BoundingBox->minVertex;
 			getSceneManagerPointer()->updateEntityCurrentBoundingBox(e2);
-			std::cout << "cube2" << std:: endl;
-			std::cout << glm::to_string(e2->boundingBox->maxVertex) << std::endl;
-			std::cout << glm::to_string(e2->boundingBox->minVertex) << std::endl;
-			std::cout << glm::to_string(e2->boundingBox->maxVertexCurr) << std::endl;
-			std::cout << glm::to_string(e2->boundingBox->minVertexCurr) << std::endl;
 
 
-			VEEntity *e3 = m_pSceneManager->loadOBJ("The ", "models\\test", "cube_t_n_s.obj", "cube.png");
-			e3->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(4.0f, 0.0f, 1.0f));
-			//veEntityBoundingBox * e2BoundingBox = e2->boundingBox;
-			//e2BoundingBox->maxVertexCurr = e2->localToParentTransform * e2BoundingBox->maxVertex;
-			//e2BoundingBox->minVertexCurr = e2->localToParentTransform * e2BoundingBox->minVertex;
+			VEEntity *e3 = m_pSceneManager->loadOBJ("The Cube3", "models\\test", "cube_t_n_s.obj", "cube.png");
+			e3->entityObjectType = "Box";
+			scale = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 1.0f, 1.0f));
+			trans = glm::translate(glm::mat4(1.0f), glm::vec3(-4.0f, 0.0f, 1.0f));
+			e3->localToParentTransform = trans * scale;
 			getSceneManagerPointer()->updateEntityCurrentBoundingBox(e3);
-			std::cout << "cube3" << std::endl;
-			std::cout << glm::to_string(e3->boundingBox->maxVertex) << std::endl;
-			std::cout << glm::to_string(e3->boundingBox->minVertex) << std::endl;
-			std::cout << glm::to_string(e3->boundingBox->maxVertexCurr) << std::endl;
-			std::cout << glm::to_string(e3->boundingBox->minVertexCurr) << std::endl;
+
+			VEEntity *ePineapple = m_pSceneManager->loadOBJ("The Pineapple", "models\\test", "Pineapple\\10200_Pineapple_v1-L2.obj", "Pineapple\\10200_Pineapple.jpg");
+			ePineapple->entityObjectType = "Fruit";
+			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f, 0.05f, 0.05f));
+			trans = glm::translate(glm::mat4(1.0f), glm::vec3(-4.0f, 2.0f, 0.5f));
+			ePineapple->localToParentTransform = trans * scale;
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(ePineapple);
+
+			VEEntity *ePineapple2 = m_pSceneManager->loadOBJ("The Pineapple2", "models\\test", "Pineapple\\10200_Pineapple_v1-L2.obj", "Pineapple\\10200_Pineapple.jpg");
+			ePineapple2->entityObjectType = "Fruit";
+			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f, 0.05f, 0.05f));
+			trans = glm::translate(glm::mat4(1.0f), glm::vec3(-4.0f, 4.0f, 0.5f));
+			ePineapple2->localToParentTransform = trans * scale;
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(ePineapple2);
 			/*
 			
 			VEEntity *e7 = m_pSceneManager->loadOBJ("The Bird2", "models\\test", "Bird1\\12248_Bird_v1_L2.obj", "Bird1\\12248_Bird_v1_diff.jpg");
@@ -220,7 +221,14 @@ namespace ve {
 		};
 
 		void onFrameStarted(veEvent event) {
-			std::set<std::string> entitiesColided = getSceneManagerPointer()->findUserCollision("The Cube");
+			std::set<VEEntity*> entitiesColided = getSceneManagerPointer()->findUserCollision("The Cube");
+			for (auto entityColided : entitiesColided) {
+				if (entityColided->entityObjectType == "Fruit") {
+					getSceneManagerPointer()->removeEntity(entityColided->entityName);
+					std::cout << "Omnomnom! ";
+				}
+			}
+
 		};
 	};
 

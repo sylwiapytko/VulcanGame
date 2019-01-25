@@ -105,6 +105,7 @@ namespace ve {
 		std::vector<VkDescriptorSet>	descriptorSets;
 
 		veEntityBoundingBox	*	boundingBox = nullptr;
+		std::string		entityObjectType = "";
 
 		VEEntity( std::string name ) : entityName(name) {};
 

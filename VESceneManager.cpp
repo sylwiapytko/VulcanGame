@@ -304,7 +304,6 @@ namespace ve {
 		glm::vec3 minVertex = vertices.front().pos;
 
 		for (auto const& v : vertices) {
-
 			if (v.pos.x > maxVertex.x) maxVertex.x = v.pos.x;
 			if (v.pos.y > maxVertex.y) maxVertex.y = v.pos.y;
 			if (v.pos.z > maxVertex.z) maxVertex.z = v.pos.z;
@@ -318,8 +317,7 @@ namespace ve {
 
 		boundingBox->maxVertexCurr = boundingBox->maxVertex;
 		boundingBox->minVertexCurr = boundingBox->minVertex;
-		std::cout << glm::to_string(maxVertex)<<std::endl;
-		std::cout << glm::to_string(minVertex) << std::endl;
+
 		return boundingBox;
 	}
 
@@ -330,27 +328,25 @@ namespace ve {
 		entityBoundingBox->minVertexCurr = entity->localToParentTransform * entityBoundingBox->minVertex;
 	}
 
-	std::set<std::string> VESceneManager::findUserCollision(std::string entityName)
+	std::set<VEEntity*> VESceneManager::findUserCollision(std::string entityName)
 	{
 		VEEntity *eUser = getSceneManagerPointer()->getEntity(entityName);
 		updateEntityCurrentBoundingBox(eUser);
 		glm::vec4 eUserBBMax = eUser->boundingBox->maxVertexCurr;
 		glm::vec4 eUserBBMin = eUser->boundingBox->minVertexCurr;
 
-		std::set<std::string> entitiesColided = {};
+		std::set<VEEntity*> entitiesColided = {};
 
 		for (auto const& entity : m_entities)
 		{
 			if (entity.second != eUser && entity.first!= "The Plane" && entity.second->boundingBox!=nullptr) {
-				//std::cout << entity.first <<std:: endl;
 				glm::vec4 entityBBMax = entity.second->boundingBox->maxVertexCurr;
 				glm::vec4 entityBBMin = entity.second->boundingBox->minVertexCurr;
 
 				if (eUserBBMax.x >= entityBBMin.x && entityBBMax.x >= eUserBBMin.x && eUserBBMax.y >= entityBBMin.y && entityBBMax.y >= eUserBBMin.y) {
-					entitiesColided.insert(entity.first);
+					VEEntity *colidedEntity = entity.second;
+					entitiesColided.insert(colidedEntity);
 					std::cout << entity.first ;
-					std::cout << glm::to_string(entityBBMin)<<" "<<glm::to_string(entityBBMax) << std::endl;
-					std::cout << glm::to_string(eUserBBMax) <<" "<< glm::to_string(eUserBBMin) << std::endl;
 				}
 			}			
 		}
