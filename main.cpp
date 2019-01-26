@@ -144,6 +144,7 @@ namespace ve {
 		LightListener() : VEEventListener() {};
 
 		void onFrameStarted(veEvent event) {
+			/*
 			std::set<std::string> &lightnames = getSceneManagerPointer()->getLightnames(); //names of lights in the scene
 			
 			if (lightnames.size() > 0) {
@@ -157,6 +158,8 @@ namespace ve {
 
 				}
 			}
+			*/
+			
 		};
 	};
 
