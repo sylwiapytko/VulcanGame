@@ -344,14 +344,36 @@ namespace ve {
 				glm::vec4 entityBBMin = entity.second->boundingBox->minVertexCurr;
 
 				if (eUserBBMax.x >= entityBBMin.x && entityBBMax.x >= eUserBBMin.x && eUserBBMax.y >= entityBBMin.y && entityBBMax.y >= eUserBBMin.y) {
-					VEEntity *colidedEntity = entity.second;
-					entitiesColided.insert(colidedEntity);
-					std::cout << entity.first ;
+					entitiesColided.insert(entity.second);
 				}
 			}			
 		}
 		return entitiesColided;
 	}
+
+	bool VESceneManager::findUserBoxCollision(std::string entityName)
+	{
+		std::set<VEEntity*> entitiesColided = findUserCollision(entityName);
+		bool box = 0;
+		for (auto entityColided : entitiesColided) {
+			if (entityColided->entityObjectType == "Box") {
+				box = 1;
+			}
+		}
+		return box;
+	}
+
+	void VESceneManager::findUserFoodCollision(std::string entityName)
+	{
+		std::set<VEEntity*> entitiesColided = findUserCollision(entityName);
+		for (auto entityColided : entitiesColided) {
+			if (entityColided->entityObjectType == "Fruit") {
+				getSceneManagerPointer()->removeEntity(entityColided->entityName);
+				std::cout << "Omnomnom! ";
+			}
+		}
+	}
+
 
 	void VESceneManager::freeTexture(veTexture & texture) {
 		if (texture.imageView != VK_NULL_HANDLE) vkDestroyImageView(VEEngine::getEnginePointer()->getRenderer()->device, texture.imageView, nullptr);
