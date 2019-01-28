@@ -323,9 +323,14 @@ namespace ve {
 
 	void VESceneManager::updateEntityCurrentBoundingBox(VEEntity * entity)
 	{
+		/*
 		veEntityBoundingBox * entityBoundingBox = entity->boundingBox;
 		entityBoundingBox->maxVertexCurr = entity->localToParentTransform * entityBoundingBox->maxVertex;
 		entityBoundingBox->minVertexCurr = entity->localToParentTransform * entityBoundingBox->minVertex;
+		*/
+		veEntityBoundingBox * entityBoundingBox = entity->boundingBox;
+		entityBoundingBox->maxVertexCurr = entity->getWorldTransform() * entityBoundingBox->maxVertex;
+		entityBoundingBox->minVertexCurr = entity->getWorldTransform() * entityBoundingBox->minVertex;
 	}
 
 	std::set<VEEntity*> VESceneManager::findUserCollision(std::string entityName)

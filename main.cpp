@@ -56,10 +56,10 @@ namespace ve {
 			e5->localToParentTransform = trans * scale;
 			*/
 
-			VEEntity *e4 = m_pSceneManager->loadOBJ("The Plane", "models\\test", "plane_t_n_s.obj", "grass.jpg", 200.0f);
+			//VEEntity *e4 = m_pSceneManager->loadOBJ("The Plane", "models\\test", "plane_t_n_s.obj", "grass.jpg", 200.0f);
 			glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(1000.0f, 1000.0f, 1.0f));
 			glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-			e4->localToParentTransform = trans * scale;
+			//e4->localToParentTransform = trans * scale;
 
 			/*
 			
@@ -120,6 +120,22 @@ namespace ve {
 			trans = glm::translate(glm::mat4(1.0f), glm::vec3(-4.0f, 4.0f, 0.5f));
 			ePineapple2->localToParentTransform = trans * scale;
 			getSceneManagerPointer()->updateEntityCurrentBoundingBox(ePineapple2);
+
+			VEEntity *eCherry = m_pSceneManager->loadOBJ("The Cherry", "models\\test", "Cherry\\10174_Cherry_v01_l3.obj", "Cherry\\Cherry.jpg");
+			eCherry->pEntityParent = getSceneManagerPointer()->getEntity("StandardCamera");
+			eCherry->entityObjectType = "Fruit";
+			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.02f, 0.02f, 0.02f));
+			trans = glm::translate(glm::mat4(1.0f), glm::vec3(-0.7f, 1.22f, -3.4f));
+			eCherry->localToParentTransform = trans*scale;
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(eCherry);
+
+			VEEntity *eCherry2 = m_pSceneManager->loadOBJ("The Cherry", "models\\test", "Cherry\\10174_Cherry_v01_l3.obj", "Cherry\\Cherry.jpg");
+			eCherry2->pEntityParent = getSceneManagerPointer()->getEntity("StandardCamera");
+			eCherry2->entityObjectType = "Fruit";
+			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.02f, 0.02f, 0.02f));
+			trans = glm::translate(glm::mat4(1.0f), glm::vec3(-0.9f, 1.22f, -3.4f));
+			eCherry2->localToParentTransform = trans * scale;
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(eCherry2);
 			/*
 			
 			VEEntity *e7 = m_pSceneManager->loadOBJ("The Bird2", "models\\test", "Bird1\\12248_Bird_v1_L2.obj", "Bird1\\12248_Bird_v1_diff.jpg");
@@ -209,6 +225,20 @@ namespace ve {
 				}
 				return false;
 			}
+			if (event.idata1 == GLFW_KEY_U) {
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
+				if (e9 != nullptr) {
+					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.1f)) * e9->localToParentTransform;	
+				}
+				return false;
+			}
+			if (event.idata1 == GLFW_KEY_O) {
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
+				if (e9 != nullptr) {
+					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -0.1f)) * e9->localToParentTransform;
+				}
+				return false;
+			}
 			return false;
 		};
 	};
@@ -217,17 +247,35 @@ namespace ve {
 		TestListener() : VEEventListener() {};
 
 		bool onKeyboard(veEvent event) {
+			
+			/*
 			if (event.idata1 == GLFW_KEY_V) {
-				getSceneManagerPointer()->removeEntity("The Cube");
-				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
+			getSceneManagerPointer()->removeEntity("The Cube");
+			VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
 			}
 			if (event.idata1 == GLFW_KEY_B) {
-				getSceneManagerPointer()->returnRemovedEntity("The Cube");
-				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");				
+			getSceneManagerPointer()->returnRemovedEntity("The Cube");
+			VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
 			}
-
+			*/
+			if (event.idata1 == GLFW_KEY_V) {
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
+				std::cout << glm::to_string(e9->getWorldTransform()) << std::endl;
+			}
+			if (event.idata1 == GLFW_KEY_B) {
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("StandardCamera");
+				glm::mat4 transobj = glm::translate(glm::mat4(1.0f), glm::vec3(3.0f, 2.0f, 4.0f));
+				std::cout << glm::to_string(glm::inverse(e9->getWorldTransform())*transobj) << std::endl;
+			}
 			if (event.idata1 == GLFW_KEY_N) {
-				
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("StandardCamera");
+				std::cout << glm::to_string(e9->getWorldTransform()) << std::endl;
+				e9 = getSceneManagerPointer()->getEntity("The Cherry");
+				//getSceneManagerPointer()->updateEntityCurrentBoundingBox(e9);
+				std::cout << glm::to_string(e9->getWorldTransform())<< std::endl;
+				std::cout << glm::to_string(e9->localToParentTransform)<< std::endl;
+				std::cout << e9->entityType<< std::endl;
+				std::cout << e9->drawEntity<< std::endl;
 			}
 			return false;
 		};
