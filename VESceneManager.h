@@ -73,6 +73,8 @@ namespace ve {
 		bool findUserBoxCollision(std::string entityName);
 		void findUserFoodCollision(std::string entityName);
 
+		bool checkLevelSuccess();
+
 		std::string		getCameraName() { return m_cameraName; };
 		void			setCameraName(std::string name) { m_cameraName = name; };
 
