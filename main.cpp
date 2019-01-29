@@ -56,10 +56,10 @@ namespace ve {
 			e5->localToParentTransform = trans * scale;
 			*/
 
-			//VEEntity *e4 = m_pSceneManager->loadOBJ("The Plane", "models\\test", "plane_t_n_s.obj", "grass.jpg", 200.0f);
-			glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(1000.0f, 1000.0f, 1.0f));
+			VEEntity *e4 = m_pSceneManager->loadOBJ("The Plane", "models\\test", "plane_t_n_s.obj", "grass.jpg", 200.0f);
+			glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 10.0f, 1.0f));
 			glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-			//e4->localToParentTransform = trans * scale;
+			e4->localToParentTransform = trans * scale;
 
 			/*
 			
@@ -107,6 +107,34 @@ namespace ve {
 			e3->localToParentTransform = trans * scale;
 			getSceneManagerPointer()->updateEntityCurrentBoundingBox(e3);
 
+			VEEntity *eWall1 = m_pSceneManager->loadOBJ("The Wall1", "models\\test", "cube_t_n_s.obj", "cube.png");
+			eWall1->entityObjectType = "Box";
+			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 10.0f, 0.5f));
+			trans = glm::translate(glm::mat4(1.0f), glm::vec3(5.0f, 0.0f, 1.0f));
+			eWall1->localToParentTransform = trans * scale;
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(eWall1);
+
+			VEEntity *eWall2 = m_pSceneManager->loadOBJ("The Wall2", "models\\test", "cube_t_n_s.obj", "cube.png");
+			eWall2->entityObjectType = "Box";
+			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 10.0f, 0.5f));
+			trans = glm::translate(glm::mat4(1.0f), glm::vec3(-4.5f, 0.0f, 1.0f));
+			eWall2->localToParentTransform = trans * scale;
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(eWall2);
+
+			VEEntity *eWall3 = m_pSceneManager->loadOBJ("The Wall3", "models\\test", "cube_t_n_s.obj", "cube.png");
+			eWall3->entityObjectType = "Box";
+			scale = glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 0.5f, 0.5f));
+			trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 5.0f, 1.0f));
+			eWall3->localToParentTransform = trans * scale;
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(eWall3);
+
+			VEEntity *eWall4 = m_pSceneManager->loadOBJ("The Wall4", "models\\test", "cube_t_n_s.obj", "cube.png");
+			eWall4->entityObjectType = "Box";
+			scale = glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 0.5f, 0.5f));
+			trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -4.5f, 1.0f));
+			eWall4->localToParentTransform = trans * scale;
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(eWall4);
+
 			VEEntity *ePineapple = m_pSceneManager->loadOBJ("The Pineapple", "models\\test", "Pineapple\\10200_Pineapple_v1-L2.obj", "Pineapple\\10200_Pineapple.jpg");
 			ePineapple->entityObjectType = "Fruit";
 			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f, 0.05f, 0.05f));
@@ -122,6 +150,12 @@ namespace ve {
 			getSceneManagerPointer()->updateEntityCurrentBoundingBox(ePineapple2);
 
 			VEEntity *eCherry = m_pSceneManager->loadOBJ("The Cherry", "models\\test", "Cherry\\10174_Cherry_v01_l3.obj", "Cherry\\Cherry.jpg");
+			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f, 0.1f, 0.1f));
+			trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.5f));
+			eCherry->localToParentTransform = trans * scale;
+
+			/*
+			VEEntity *eCherry = m_pSceneManager->loadOBJ("The Cherry", "models\\test", "Cherry\\10174_Cherry_v01_l3.obj", "Cherry\\Cherry.jpg");
 			eCherry->pEntityParent = getSceneManagerPointer()->getEntity("StandardCamera");
 			eCherry->entityObjectType = "Fruit";
 			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.02f, 0.02f, 0.02f));
@@ -136,7 +170,7 @@ namespace ve {
 			trans = glm::translate(glm::mat4(1.0f), glm::vec3(-0.9f, 1.22f, -3.4f));
 			eCherry2->localToParentTransform = trans * scale;
 			getSceneManagerPointer()->updateEntityCurrentBoundingBox(eCherry2);
-			/*
+			
 			
 			VEEntity *e7 = m_pSceneManager->loadOBJ("The Bird2", "models\\test", "Bird1\\12248_Bird_v1_L2.obj", "Bird1\\12248_Bird_v1_diff.jpg");
 			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f, 0.05f, 0.05f));
@@ -268,14 +302,8 @@ namespace ve {
 				std::cout << glm::to_string(glm::inverse(e9->getWorldTransform())*transobj) << std::endl;
 			}
 			if (event.idata1 == GLFW_KEY_N) {
-				VEEntity *e9 = getSceneManagerPointer()->getEntity("StandardCamera");
+				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
 				std::cout << glm::to_string(e9->getWorldTransform()) << std::endl;
-				e9 = getSceneManagerPointer()->getEntity("The Cherry");
-				//getSceneManagerPointer()->updateEntityCurrentBoundingBox(e9);
-				std::cout << glm::to_string(e9->getWorldTransform())<< std::endl;
-				std::cout << glm::to_string(e9->localToParentTransform)<< std::endl;
-				std::cout << e9->entityType<< std::endl;
-				std::cout << e9->drawEntity<< std::endl;
 			}
 			return false;
 		};
