@@ -365,7 +365,7 @@ namespace ve {
 		std::set<VEEntity*> entitiesColided = findUserCollision(entityName);
 		bool box = 0;
 		for (auto entityColided : entitiesColided) {
-			if (entityColided->entityObjectType == "Box") {
+			if (entityColided->entityObjectType == "Box" || entityColided->entityObjectType == "Wall") {
 				box = 1;
 			}
 		}

@@ -166,28 +166,28 @@ namespace ve {
 			///////WALLS///////////////////////////////////////////////////////////////////////////////////////////////
 			{
 				VEEntity *eWall1 = m_pSceneManager->loadOBJ("The Wall1", "models\\test", "cube_t_n_s.obj", "cube.png");
-				eWall1->entityObjectType = "Box";
+				eWall1->entityObjectType = "Wall";
 				scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 10.0f, 0.5f));
 				trans = glm::translate(glm::mat4(1.0f), glm::vec3(5.0f, 0.0f, 1.0f));
 				eWall1->localToParentTransform = trans * scale;
 				getSceneManagerPointer()->updateEntityCurrentBoundingBox(eWall1);
 
 				VEEntity *eWall2 = m_pSceneManager->loadOBJ("The Wall2", "models\\test", "cube_t_n_s.obj", "cube.png");
-				eWall2->entityObjectType = "Box";
+				eWall2->entityObjectType = "Wall";
 				scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 10.0f, 0.5f));
 				trans = glm::translate(glm::mat4(1.0f), glm::vec3(-4.5f, 0.0f, 1.0f));
 				eWall2->localToParentTransform = trans * scale;
 				getSceneManagerPointer()->updateEntityCurrentBoundingBox(eWall2);
 
 				VEEntity *eWall3 = m_pSceneManager->loadOBJ("The Wall3", "models\\test", "cube_t_n_s.obj", "cube.png");
-				eWall3->entityObjectType = "Box";
+				eWall3->entityObjectType = "Wall";
 				scale = glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 0.5f, 0.5f));
 				trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 5.0f, 1.0f));
 				eWall3->localToParentTransform = trans * scale;
 				getSceneManagerPointer()->updateEntityCurrentBoundingBox(eWall3);
 
 				VEEntity *eWall4 = m_pSceneManager->loadOBJ("The Wall4", "models\\test", "cube_t_n_s.obj", "cube.png");
-				eWall4->entityObjectType = "Box";
+				eWall4->entityObjectType = "Wall";
 				scale = glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 0.5f, 0.5f));
 				trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -4.5f, 1.0f));
 				eWall4->localToParentTransform = trans * scale;
@@ -242,21 +242,7 @@ namespace ve {
 			}
 
 		};
-		void loadSuccess() {
-			glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-			glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-
-			
-				VEEntity *ePineapple = m_pSceneManager->loadOBJ("The Pineapple", "models\\test", "Pineapple\\10200_Pineapple_v1-L2.obj", "Pineapple\\10200_Pineapple.jpg");
-				ePineapple->entityObjectType = "Fruit";
-				scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f));
-				trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.5f));
-				ePineapple->localToParentTransform = trans * scale;
-				//getSceneManagerPointer()->updateEntityCurrentBoundingBox(ePineapple);
-
-			
-
-		};
+		
 	};
 
 	class LightListener : public VEEventListener {
@@ -351,6 +337,30 @@ namespace ve {
 	public:
 		TestListener() : VEEventListener() {};
 
+		void loadSuccess() {
+
+			VEEntity *ePineappleReward = getSceneManagerPointer()->loadOBJ("The PineappleReward", "models\\test", "Pineapple\\10200_Pineapple_v1-L2.obj", "Pineapple\\10200_Pineapple.jpg");
+			glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.2f, 0.2f, 0.2f));
+			glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.5f));
+			ePineappleReward->localToParentTransform = trans * scale;
+		}
+		void loadUser() {
+
+			VEEntity *e1 = getSceneManagerPointer()->loadOBJ("The Cube", "models\\test", "cube_t_n_s.obj", "cube.png");
+			e1->entityObjectType = "User";
+			e1->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(e1);
+		}
+		void loadFruits() {
+			
+			getSceneManagerPointer()->returnRemovedEntity("The Pineapple");
+			getSceneManagerPointer()->returnRemovedEntity("The Pineapple2");
+			getSceneManagerPointer()->returnRemovedEntity("The Pineapple3");
+			getSceneManagerPointer()->returnRemovedEntity("The Pineapple4");
+			getSceneManagerPointer()->returnRemovedEntity("The Pineapple5");
+			
+		}
+
 		bool onKeyboard(veEvent event) {
 			
 			if (event.idata1 == GLFW_KEY_V) {
@@ -362,6 +372,14 @@ namespace ve {
 				glm::mat4 transobj = glm::translate(glm::mat4(1.0f), glm::vec3(3.0f, 2.0f, 4.0f));
 				std::cout << glm::to_string(glm::inverse(e9->getWorldTransform())*transobj) << std::endl;
 			}
+			if (event.idata1 == GLFW_KEY_SPACE) {
+				if (getSceneManagerPointer()->checkLevelSuccess()) {
+					loadFruits();
+					loadUser();
+
+					getSceneManagerPointer()->removeEntity("The PineappleReward");
+				}
+			}
 
 			return false;
 		};
@@ -370,18 +388,14 @@ namespace ve {
 			getSceneManagerPointer()->findUserFoodCollision("The Cube");	
 
 			if (getSceneManagerPointer()->checkLevelSuccess()) {
-				glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-				glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
-				
+
 				getSceneManagerPointer()->removeEntity("The Cube");
-				
-				VEEntity *ePineappleReward = getSceneManagerPointer()->loadOBJ("The PineappleReward", "models\\test", "Pineapple\\10200_Pineapple_v1-L2.obj", "Pineapple\\10200_Pineapple.jpg");
-				scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.2f, 0.2f, 0.2f));
-				trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.5f));
-				ePineappleReward->localToParentTransform = trans * scale;
+				loadSuccess();
 			}
 
 		};
+
+		
 	};
 
 }
