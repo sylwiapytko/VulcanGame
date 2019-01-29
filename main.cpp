@@ -272,9 +272,9 @@ namespace ve {
 		};
 	};
 
-	class BirdListener : public VEEventListener {
+	class UserListener : public VEEventListener {
 	public:
-		BirdListener() : VEEventListener() {};
+		UserListener() : VEEventListener() {};
 
 		bool onKeyboard(veEvent event) {
 			if (event.idata1 == GLFW_KEY_J) {
@@ -335,12 +335,12 @@ namespace ve {
 			return false;
 		};
 	};
-	class TestListener : public VEEventListener {
+	class LogicListener : public VEEventListener {
 		float time = 0.0f;
 		bool bomb1 = true;
 		bool bomb2 = false;
 	public:
-		TestListener() : VEEventListener() {};
+		LogicListener() : VEEventListener() {};
 
 		
 		void loadSuccess() {
@@ -499,11 +499,11 @@ int main() {
 	LightListener * listener = new LightListener();
 	mve.registerEventListener("LightListener", listener);
 
-	BirdListener * listener1 = new BirdListener();
-	mve.registerEventListener("BirdListener", listener1);
+	UserListener * listener1 = new UserListener();
+	mve.registerEventListener("UserListener", listener1);
 
-	TestListener * listener2 = new TestListener();
-	mve.registerEventListener("TestListener", listener2);
+	LogicListener * listener2 = new LogicListener();
+	mve.registerEventListener("LogicListener", listener2);
 
 	try {
 		mve.run();
