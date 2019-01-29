@@ -31,7 +31,7 @@ namespace ve {
 	void VESceneManager::initSceneManager() {
 		//camera parent is used for translation rotations
 		VEEntity *cameraParent = new VEEntity("StandardCameraParent");
-		cameraParent->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(5.0f, 5.0f, 5.0f));
+		cameraParent->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(10.0, 10.0f, 10.0f));
 		addEntity(cameraParent);
 
 		//camera can only do yaw (parent y-axis) and pitch (local x-axis) rotations
