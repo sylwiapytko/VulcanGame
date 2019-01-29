@@ -259,6 +259,7 @@ namespace ve {
 		void loadSuccess() {
 
 			VEEntity *ePineappleReward = getSceneManagerPointer()->loadOBJ("The PineappleReward", "models\\test", "Pineapple\\10200_Pineapple_v1-L2.obj", "Pineapple\\10200_Pineapple.jpg");
+			ePineappleReward->entityObjectType = "Success";
 			glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.2f, 0.2f, 0.2f));
 			glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.5f));
 			ePineappleReward->localToParentTransform = trans * scale;
@@ -352,8 +353,8 @@ namespace ve {
 					loadFruits();
 					loadUser();
 					getSceneManagerPointer()->updateLevel();
-					if (getSceneManagerPointer()->getLevel() >= 2) {
-						std::cout << getSceneManagerPointer()->getLevel();
+					std::cout << std::endl << "Welcome to level: " << getSceneManagerPointer()->getLevel() << std::endl;
+					if (getSceneManagerPointer()->getLevel() >= 2) {						
 						loadBombs();
 					}
 
@@ -364,7 +365,7 @@ namespace ve {
 					loadFruits();
 					loadUser();
 					getSceneManagerPointer()->repeatGame();
-
+					std::cout << std::endl << "You Dead! Level: " << getSceneManagerPointer()->getLevel() << std::endl;
 					getSceneManagerPointer()->removeEntity("The BombDead");
 				}
 			}

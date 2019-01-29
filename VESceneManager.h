@@ -79,8 +79,8 @@ namespace ve {
 		bool findUserBombCollision(std::string entityName);
 
 		bool checkLevelSuccess();
-
 		bool checkDead();
+		
 
 		int	getLevel() { return level; };
 		void updateLevel() { level = level++; };

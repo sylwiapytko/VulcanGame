@@ -82,11 +82,12 @@ namespace ve {
 		glm::vec4 translate = glm::vec4(0.0, 0.0, 0.0, 1.0);	//total translation
 		glm::vec4 rot4 = glm::vec4(1.0);						//total rotation around the axes, is 4d !
 		float angle = 0.0;
-
+		
 		VECamera *pCamera = (VECamera*)VEEngine::getEnginePointer()->m_pSceneManager->getEntity(VEEngine::getEnginePointer()->getSceneManager()->getCameraName());
 		VEEntity *pParent = pCamera->pEntityParent;
 
 		switch (event.idata1) {
+			/*
 		case GLFW_KEY_A:
 			translate = glm::vec4(-1.0, 0.0, 0.0, 1.0);
 			break;
@@ -121,7 +122,7 @@ namespace ve {
 			angle = (float)event.dt * 1.0;			//pitch angle
 			rot4 = pCamera->localToParentTransform * glm::vec4(1.0, 0.0, 0.0, 1.0); //x axis from local to parent space!
 			break;
-
+		*/
 		default:
 			return false;
 		};
@@ -144,7 +145,7 @@ namespace ve {
 		glm::vec3    rot3 = glm::vec3(rot4.x, rot4.y, rot4.z);
 		glm::mat4x4  rotate = glm::rotate(glm::mat4(1.0), angle, rot3);
 		pCamera->localToParentTransform = rotate * pCamera->localToParentTransform;
-
+		
 		return true;
 	}
 
@@ -171,7 +172,7 @@ namespace ve {
 
 		m_cursorPrevX = x;
 		m_cursorPrevY = y;
-
+		/*
 		VECamera *pCamera = (VECamera*)VEEngine::getEnginePointer()->getSceneManager()->getEntity(VEEngine::getEnginePointer()->getSceneManager()->getCameraName());
 		VEEntity *pParent = pCamera->pEntityParent;
 
@@ -190,7 +191,7 @@ namespace ve {
 		glm::mat4x4 rotatedy = glm::rotate(glm::mat4(1.0), angledy, rot3dy);
 
 		pCamera->localToParentTransform = rotatedx * rotatedy * pCamera->localToParentTransform;
-		
+		*/
 		return false;
 	}
 
