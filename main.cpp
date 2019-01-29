@@ -41,91 +41,29 @@ namespace ve {
 		MyVulkanEngine() {};
 		~MyVulkanEngine() {};
 		void loadLevel() {
-			
-			/*
-			VEEntity *e1 = m_pSceneManager->loadOBJ( "The Cube", "models\\test", "cube_t_n_s.obj", "cube.png");
-			e1->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-			VEEntity *e2 = m_pSceneManager->loadOBJ( "The Cube2", "models\\test", "cube_t_n_s.obj", "crate0\\crate0_diffuse.png");
-			e2->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 1.0f ));
-			VEEntity *e3 = m_pSceneManager->loadOBJ("The Cube3", "models\\test", "cube_t_n_s.obj", "crate2\\crate2_diffuse.png");
-			e3->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(-2.0f, 4.0f, 1.0f));
-
-			VEEntity *e5 = m_pSceneManager->loadOBJ("The Chalet", "models", "chalet.obj", "chalet.jpg");
-			scale = glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 10.0f, 10.0f));
-			trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -15.0f, 0.0f));
-			e5->localToParentTransform = trans * scale;
-			*/
 
 			VEEntity *ePlane = m_pSceneManager->loadOBJ("The Plane", "models\\test", "plane_t_n_s.obj", "grass.jpg", 200.0f);
 			glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 10.0f, 1.0f));
 			glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 			ePlane->localToParentTransform = trans * scale;
 
-			/*
-			
+			VEEntity *e5 = m_pSceneManager->loadOBJ("The Chalet", "models", "chalet.obj", "chalet.jpg");
+			scale = glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 10.0f, 10.0f));
+			trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -15.0f, 0.0f));
+			e5->localToParentTransform = trans * scale;
+
 			VEEntity *e6 = m_pSceneManager->loadOBJ("The Bird", "models\\test", "Bird1\\12248_Bird_v1_L2.obj", "Bird1\\12248_Bird_v1_diff.jpg");
 			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f, 0.05f, 0.05f));
 			trans = glm::translate(glm::mat4(1.0f), glm::vec3(00.0f, -2.0f, 1.0f));
 			glm::mat4 rotate = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 			e6->localToParentTransform = trans *rotate*  scale;
 			getSceneManagerPointer()->updateEntityCurrentBoundingBox(e6);
-			std::cout << "Duck" << std::endl;
-			std::cout << glm::to_string(e6->boundingBox->maxVertex) << std::endl;
-			std::cout << glm::to_string(e6->boundingBox->minVertex) << std::endl;
-			std::cout << "Duck" << std::endl;
-			std::cout << glm::to_string(e6->boundingBox->maxVertexCurr) << std::endl;
-			std::cout << glm::to_string(e6->boundingBox->minVertexCurr) << std::endl;
-			*/
-			
-			/*
-
-			VEEntity *eBomb = m_pSceneManager->loadOBJ("The Bomb", "models\\test", "Bomb1\\dinamite.obj", "Bomb1\\D.png");
-			//scale = glm::scale(glm::mat4(1.0f), glm::vec3(10.1f, 10.1f, 10.1f));
-			trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.5f));
-			eBomb->localToParentTransform = trans;// *scale;
-			*/
-
 
 			VEEntity *e1 = m_pSceneManager->loadOBJ("The Cube", "models\\test", "cube_t_n_s.obj", "cube.png");
 			e1->entityObjectType = "User";
 			e1->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, 1.0f));
 			getSceneManagerPointer()->updateEntityCurrentBoundingBox(e1);
-
-			VEEntity *e2 = m_pSceneManager->loadOBJ("The Cube2", "models\\test", "cube_t_n_s.obj", "cube.png");
-			e2->entityObjectType = "Box";
-			e2->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 1.0f));
-			getSceneManagerPointer()->updateEntityCurrentBoundingBox(e2);
-
-			VEEntity *e3 = m_pSceneManager->loadOBJ("The Cube3", "models\\test", "cube_t_n_s.obj", "cube.png");
-			e3->entityObjectType = "Box";
-			scale = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 1.0f, 1.0f));
-			trans = glm::translate(glm::mat4(1.0f), glm::vec3(-4.0f, 0.0f, 1.0f));
-			e3->localToParentTransform = trans * scale;
-			getSceneManagerPointer()->updateEntityCurrentBoundingBox(e3);
-
-			///////FRUITS///////////////////////////////////////////////////////////////////////////////////////////////
-
-			VEEntity *ePineapple = m_pSceneManager->loadOBJ("The Pineapple", "models\\test", "Pineapple\\10200_Pineapple_v1-L2.obj", "Pineapple\\10200_Pineapple.jpg");
-			ePineapple->entityObjectType = "Fruit";
-			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f, 0.05f, 0.05f));
-			trans = glm::translate(glm::mat4(1.0f), glm::vec3(-4.0f, 2.0f, 0.5f));
-			ePineapple->localToParentTransform = trans * scale;
-			getSceneManagerPointer()->updateEntityCurrentBoundingBox(ePineapple);
-
-			VEEntity *ePineapple2 = m_pSceneManager->loadOBJ("The Pineapple2", "models\\test", "Pineapple\\10200_Pineapple_v1-L2.obj", "Pineapple\\10200_Pineapple.jpg");
-			ePineapple2->entityObjectType = "Fruit";
-			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f, 0.05f, 0.05f));
-			trans = glm::translate(glm::mat4(1.0f), glm::vec3(-4.0f, 4.0f, 0.5f));
-			ePineapple2->localToParentTransform = trans * scale;
-			getSceneManagerPointer()->updateEntityCurrentBoundingBox(ePineapple2);
-
-			VEEntity *eCherry = m_pSceneManager->loadOBJ("The Cherry", "models\\test", "Cherry\\10174_Cherry_v01_l3.obj", "Cherry\\Cherry.jpg");
-			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f, 0.1f, 0.1f));
-			trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.5f));
-			eCherry->localToParentTransform = trans * scale;
-
-
-			/*
+			
 			VEEntity *eCherry = m_pSceneManager->loadOBJ("The Cherry", "models\\test", "Cherry\\10174_Cherry_v01_l3.obj", "Cherry\\Cherry.jpg");
 			eCherry->pEntityParent = getSceneManagerPointer()->getEntity("StandardCamera");
 			eCherry->entityObjectType = "Fruit";
@@ -141,22 +79,9 @@ namespace ve {
 			trans = glm::translate(glm::mat4(1.0f), glm::vec3(-0.9f, 1.22f, -3.4f));
 			eCherry2->localToParentTransform = trans * scale;
 			getSceneManagerPointer()->updateEntityCurrentBoundingBox(eCherry2);
-			
-			
-			VEEntity *e7 = m_pSceneManager->loadOBJ("The Bird2", "models\\test", "Bird1\\12248_Bird_v1_L2.obj", "Bird1\\12248_Bird_v1_diff.jpg");
-			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f, 0.05f, 0.05f));
-			trans = glm::translate(glm::mat4(1.0f), glm::vec3(8.0f, 4.0f, 1.0f));
-			rotate = glm::rotate(glm::mat4(1.0f), glm::radians(180.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-			e7->localToParentTransform = trans * rotate*  scale;
-
-			VEEntity *e8 = m_pSceneManager->loadOBJ("The Bird3", "models\\test", "Bird2\\12249_Bird_v1_L2.obj", "Bird2\\12249_Bird_v1_diff.jpg");
-			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f, 0.05f, 0.05f));
-			trans = glm::translate(glm::mat4(1.0f), glm::vec3(4.0f, 6.0f, 1.0f));
-			rotate = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-			e8->localToParentTransform = trans * rotate*  scale;
-			*/
 
 		};
+
 		void loadBase() {
 			VEEntity *ePlane = m_pSceneManager->loadOBJ("The Plane", "models\\test", "plane_t_n_s.obj", "grass.jpg", 200.0f);
 			glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(10.0f, 10.0f, 1.0f));
@@ -318,23 +243,11 @@ namespace ve {
 				}
 				return false;
 			}
-			if (event.idata1 == GLFW_KEY_U) {
-				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
-				if (e9 != nullptr) {
-					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.1f)) * e9->localToParentTransform;	
-				}
-				return false;
-			}
-			if (event.idata1 == GLFW_KEY_O) {
-				VEEntity *e9 = getSceneManagerPointer()->getEntity("The Cube");
-				if (e9 != nullptr) {
-					e9->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -0.1f)) * e9->localToParentTransform;
-				}
-				return false;
-			}
+			
 			return false;
 		};
 	};
+
 	class LogicListener : public VEEventListener {
 		float time = 0.0f;
 		bool bomb1 = true;
@@ -391,6 +304,35 @@ namespace ve {
 			trans = glm::translate(glm::mat4(1.0f), glm::vec3(-2.0f, 3.5f, 1.0f));
 			eBomb2->localToParentTransform = trans * scale;
 			getSceneManagerPointer()->updateEntityCurrentBoundingBox(eBomb2);
+		}
+		void moveBombs(veEvent event) {
+			VEEntity *eBomb1 = getSceneManagerPointer()->getEntity("The Bomb");
+			if (eBomb1 != nullptr) {
+				time += event.dt;
+				if (getSceneManagerPointer()->findUserBoxCollision("The Bomb")) {
+					bomb1 = !bomb1;
+				}
+				if (bomb1 == true) {
+					eBomb1->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.01f, 0.0f)) * eBomb1->localToParentTransform;
+				}
+				else {
+					eBomb1->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.01f, 0.0f)) * eBomb1->localToParentTransform;
+				}
+			}
+			VEEntity *eBomb2 = getSceneManagerPointer()->getEntity("The Bomb2");
+			if (eBomb2 != nullptr) {
+				time += event.dt;
+				if (getSceneManagerPointer()->findUserBoxCollision("The Bomb2")) {
+					bomb2 = !bomb2;
+				}
+				if (bomb2 == true) {
+					eBomb2->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.01f, 0.0f)) * eBomb2->localToParentTransform;
+				}
+				else {
+					eBomb2->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.01f, 0.0f)) * eBomb2->localToParentTransform;
+				}
+			}
+		
 		}
 
 		bool onKeyboard(veEvent event) {
@@ -453,32 +395,7 @@ namespace ve {
 			}
 
 			if (getSceneManagerPointer()->getLevel() >= 3) {
-				VEEntity *eBomb1 = getSceneManagerPointer()->getEntity("The Bomb");
-				if (eBomb1 != nullptr) {
-					time += event.dt;
-					if (getSceneManagerPointer()->findUserBoxCollision("The Bomb")) {
-						bomb1 = !bomb1;
-					}
-					if (bomb1 == true) {
-						eBomb1->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.01f, 0.0f)) * eBomb1->localToParentTransform;
-					}
-					else {
-						eBomb1->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.01f, 0.0f)) * eBomb1->localToParentTransform;
-					}
-				}
-				VEEntity *eBomb2 = getSceneManagerPointer()->getEntity("The Bomb2");
-				if (eBomb2 != nullptr) {
-					time += event.dt;
-					if (getSceneManagerPointer()->findUserBoxCollision("The Bomb2")) {
-						bomb2 = !bomb2;
-					}
-					if (bomb2 == true) {
-						eBomb2->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.01f, 0.0f)) * eBomb2->localToParentTransform;
-					}
-					else {
-						eBomb2->localToParentTransform = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -0.01f, 0.0f)) * eBomb2->localToParentTransform;
-					}
-				}
+				moveBombs(event);
 			}
 
 

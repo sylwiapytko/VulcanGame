@@ -48,6 +48,7 @@ namespace ve {
 			VEEngine::getEnginePointer()->m_keys_pressed.insert(event.idata1);
 
 			// Movment keys - rotation I=73 J=74 K=75 L=76 
+			/*
 			if (event.idata1 == 73 || event.idata1 == 74 || event.idata1 == 75 || event.idata1 == 76) {
 				int key_pressed_last = VEEngine::getEnginePointer()->m_keys_pressed_last;
 				VEEngine::getEnginePointer()->m_keys_pressed_last = event.idata1;
@@ -67,7 +68,7 @@ namespace ve {
 					e9->localToParentTransform = e9->localToParentTransform *rotate;
 				}
 			}			
-			
+			*/
 			return true;
 		}
 
