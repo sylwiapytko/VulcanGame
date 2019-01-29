@@ -264,6 +264,15 @@ namespace ve {
 		m_removedEntities.erase(name);
 	}
 
+	void VESceneManager::cleanBoard() {
+			for (auto const& entity : m_entities)
+			{
+				if (entity.second->entityObjectType == "Fruit" || entity.second->entityObjectType == "Bomb") {
+					removeEntity(entity.first);
+				}
+			}	
+	}
+
 	void VESceneManager::removeEntityData(std::string name) {
 		veEntityData * pEntityData = m_entityData[name];
 		std::vector<std::string> remove_ent = {};
@@ -355,9 +364,9 @@ namespace ve {
 						entitiesColided.insert(entity.second);
 					}
 				}
-			}
-			return entitiesColided;
+			}			
 		}
+		return entitiesColided;
 	}
 
 	bool VESceneManager::findUserBoxCollision(std::string entityName)
@@ -382,6 +391,17 @@ namespace ve {
 			}
 		}
 	}
+	bool VESceneManager::findUserBombCollision(std::string entityName)
+	{
+		std::set<VEEntity*> entitiesColided = findUserCollision(entityName);
+		for (auto entityColided : entitiesColided) {
+			if (entityColided->entityObjectType == "Bomb") {
+				std::cout << "BUM! ";
+				return true;
+			}
+		}
+		return false;
+	}
 
 	bool VESceneManager::checkLevelSuccess()
 	{
@@ -392,6 +412,16 @@ namespace ve {
 			}
 		}
 		return true;
+	}
+	bool VESceneManager::checkDead()
+	{
+		for (auto const& entity : m_entities)
+		{
+			if (entity.second->entityObjectType == "Dead") {
+				return true;
+			}
+		}
+		return false;
 	}
 
 

@@ -32,6 +32,7 @@ namespace ve {
 
 		std::map<std::string, veEntityBoundingBox*> m_entityBoundingBox = {};	
 		std::set<VEEntity*>					s_entitiesUserColided = {};
+		int	level = 1;
 
 		std::string			  m_cameraName = "";				//entity name of the current camera
 		std::set<std::string> m_lightNames = {};				//names of the lights to use
@@ -60,6 +61,8 @@ namespace ve {
 		void			removeEntity(std::string name);
 		void			returnRemovedEntity(std::string name);
 
+		void cleanBoard();
+
 		void			addEntityData(veEntityData *entityData) { m_entityData[entityData->entityDataName] = entityData; };
 		veEntityData *	getEntityData(std::string entityDataName);
 		void			removeEntityData(std::string name);
@@ -73,7 +76,15 @@ namespace ve {
 		bool findUserBoxCollision(std::string entityName);
 		void findUserFoodCollision(std::string entityName);
 
+		bool findUserBombCollision(std::string entityName);
+
 		bool checkLevelSuccess();
+
+		bool checkDead();
+
+		int	getLevel() { return level; };
+		void updateLevel() { level = level++; };
+		void repeatGame() { level = 1; };
 
 		std::string		getCameraName() { return m_cameraName; };
 		void			setCameraName(std::string name) { m_cameraName = name; };

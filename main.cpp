@@ -241,6 +241,8 @@ namespace ve {
 				getSceneManagerPointer()->updateEntityCurrentBoundingBox(ePineapple5);
 			}
 
+			
+
 		};
 		
 	};
@@ -337,12 +339,21 @@ namespace ve {
 	public:
 		TestListener() : VEEventListener() {};
 
+		
 		void loadSuccess() {
 
 			VEEntity *ePineappleReward = getSceneManagerPointer()->loadOBJ("The PineappleReward", "models\\test", "Pineapple\\10200_Pineapple_v1-L2.obj", "Pineapple\\10200_Pineapple.jpg");
 			glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.2f, 0.2f, 0.2f));
 			glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.5f));
 			ePineappleReward->localToParentTransform = trans * scale;
+		}
+		void loadDead() {
+
+			VEEntity *eBombDead = getSceneManagerPointer()->loadOBJ("The BombDead", "models\\test", "Bomb1\\dinamite.obj", "Bomb1\\D.png");
+			eBombDead->entityObjectType = "Dead";
+			glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(2.5f, 2.5f, 2.5f));
+			glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 3.0f));
+			eBombDead->localToParentTransform = trans * scale;
 		}
 		void loadUser() {
 
@@ -360,6 +371,31 @@ namespace ve {
 			getSceneManagerPointer()->returnRemovedEntity("The Pineapple5");
 			
 		}
+		void loadBombs() {
+			glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+			glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
+
+			VEEntity *eBomb = getSceneManagerPointer()->loadOBJ("The Bomb", "models\\test", "Bomb1\\dinamite.obj", "Bomb1\\D.png");
+			eBomb->entityObjectType = "Bomb";
+			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f));
+			trans = glm::translate(glm::mat4(1.0f), glm::vec3(4.0f, 0.0f, 1.0f));
+			eBomb->localToParentTransform = trans * scale;
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(eBomb);
+
+			VEEntity *eBomb2 = getSceneManagerPointer()->loadOBJ("The Bomb2", "models\\test", "Bomb1\\dinamite.obj", "Bomb1\\D.png");
+			eBomb2->entityObjectType = "Bomb";
+			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f));
+			trans = glm::translate(glm::mat4(1.0f), glm::vec3(-3.0f, -3.0f, 1.0f));
+			eBomb2->localToParentTransform = trans * scale;
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(eBomb2);
+
+			VEEntity *eBomb3 = getSceneManagerPointer()->loadOBJ("The Bomb3", "models\\test", "Bomb1\\dinamite.obj", "Bomb1\\D.png");
+			eBomb3->entityObjectType = "Bomb";
+			scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.5f));
+			trans = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 3.0f, 1.0f));
+			eBomb3->localToParentTransform = trans * scale;
+			getSceneManagerPointer()->updateEntityCurrentBoundingBox(eBomb3);
+		}
 
 		bool onKeyboard(veEvent event) {
 			
@@ -374,10 +410,24 @@ namespace ve {
 			}
 			if (event.idata1 == GLFW_KEY_SPACE) {
 				if (getSceneManagerPointer()->checkLevelSuccess()) {
+					getSceneManagerPointer()->cleanBoard();
 					loadFruits();
 					loadUser();
+					getSceneManagerPointer()->updateLevel();
+					if (getSceneManagerPointer()->getLevel() >= 2) {
+						std::cout << getSceneManagerPointer()->getLevel();
+						loadBombs();
+					}
 
 					getSceneManagerPointer()->removeEntity("The PineappleReward");
+				}
+				if (getSceneManagerPointer()->checkDead()) {
+					getSceneManagerPointer()->cleanBoard();
+					loadFruits();
+					loadUser();
+					getSceneManagerPointer()->repeatGame();
+
+					getSceneManagerPointer()->removeEntity("The BombDead");
 				}
 			}
 
@@ -387,9 +437,15 @@ namespace ve {
 		void onFrameStarted(veEvent event) {
 			getSceneManagerPointer()->findUserFoodCollision("The Cube");	
 
-			if (getSceneManagerPointer()->checkLevelSuccess()) {
+			if (getSceneManagerPointer()->findUserBombCollision("The Cube")) {
 
 				getSceneManagerPointer()->removeEntity("The Cube");
+				loadDead();
+			}
+
+			if (getSceneManagerPointer()->checkLevelSuccess()) {
+
+				getSceneManagerPointer()->removeEntity("The Cube");				
 				loadSuccess();
 			}
 
