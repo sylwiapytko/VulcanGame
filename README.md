@@ -1,0 +1,1 @@
+Demo game based on Vulcan Engine. Created as final project for Real-Time Computer Graphics course at Vienna University. Implementation of Vulcan API prepared by university staff can be found on https://github.com/SaschaWillems/Vulkan.
